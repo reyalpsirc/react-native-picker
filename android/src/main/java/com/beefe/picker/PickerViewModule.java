@@ -21,6 +21,7 @@ import com.beefe.picker.view.ReturnData;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.LifecycleEventListener;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -388,6 +389,16 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
         }
         String[] selectedValue = getSelectedValue(array);
         select(selectedValue);
+    }
+
+    @ReactMethod
+    public void getHeight(Promise promise) {
+        if (dialog == null|| !dialog.isShowing()) {
+            promise.resolve(0);
+            return;
+        }
+        float density = getReactApplicationContext().getResources().getDisplayMetrics().density;
+        promise.resolve(dialog.getWindow().getAttributes().height / density);
     }
 
     @ReactMethod

@@ -1,8 +1,10 @@
 import {
     Platform,
     NativeModules,
+    Dimensions,
     NativeAppEventEmitter
 } from 'react-native';
+const { width, height } = Dimensions.get('window')
 
 const ios = Platform.OS === 'ios';
 const android = Platform.OS === 'android';
@@ -78,6 +80,10 @@ export default {
                 this.show();
             }
         });
+    },
+
+    async getHeight(){
+        return ios ? 250 * width / 375 : await Picker.getHeight()
     },
 
     isPickerShow(fn){
