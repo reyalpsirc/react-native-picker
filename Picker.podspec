@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.source         = { :git => 'https://github.com/beefe/react-native-picker.git', :tag => "v#{s.version}"}
   s.platform       = :ios, '7.0'
   s.preserve_paths = '*.js'
+  s.dependency      'React'
 
   s.subspec 'Core' do |ss|
     ss.source_files = 'ios/RCTBEEPickerManager/*.{h,m}'
